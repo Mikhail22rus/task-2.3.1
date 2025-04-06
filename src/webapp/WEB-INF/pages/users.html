@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Users</title>
+</head>
+<body>
+<h1>All users</h1>
+
+
+<a href="/users/new">
+    <button>Create New User</button>
+</a>
+
+
+<ul>
+    <li th:each="user : ${users}">
+        <p th:text="'Name: ' + ${user.name}"></p>
+        <p th:text="'Age: ' + ${user.age}"></p>
+    </li>
+</ul>
+</body>
+</html>

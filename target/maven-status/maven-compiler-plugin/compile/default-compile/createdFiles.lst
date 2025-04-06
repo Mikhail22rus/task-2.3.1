@@ -1,0 +1,7 @@
+web\service\UserService.class
+web\config\DataConfig.class
+web\repository\UserRepository.class
+web\config\AppInit.class
+web\config\WebConfig.class
+web\controller\UserController.class
+web\model\User.class
