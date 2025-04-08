@@ -1,10 +1,12 @@
-package web.service;
+package web.repository;
 
+import org.springframework.stereotype.Repository;
 import web.model.User;
 
 import java.util.List;
 
-public interface UserService {
+@Repository
+public interface UserDao {
     List<User> getAllUsers();
 
     User getUserById(Long id);

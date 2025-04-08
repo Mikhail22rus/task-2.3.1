@@ -1,7 +1,9 @@
 web\service\UserService.class
+web\repository\UserDao.class
 web\config\DataConfig.class
-web\repository\UserRepository.class
 web\config\AppInit.class
 web\config\WebConfig.class
 web\controller\UserController.class
+web\repository\UserDaoImpl.class
 web\model\User.class
+web\service\UserServiceImp.class

@@ -1,5 +1,7 @@
 package web.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,12 +18,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "web.repository")
 public class DataConfig {
+    private static final Logger logger = LoggerFactory.getLogger(DataConfig.class);
 
     @Autowired
     private Environment env;
@@ -49,8 +53,15 @@ public class DataConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(getDataSource());
-        factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         factoryBean.setPackagesToScan("web.model");
+        factoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+
+        Properties properties = new Properties();
+        properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+
+        factoryBean.setJpaProperties(properties);
         return factoryBean;
     }
 
